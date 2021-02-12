@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Formulario = () => {
-  const [busqueda, setbusqueda] = useState({
+const Formulario = ({ setBusquedaLetra }) => {
+  const [busqueda, setBusqueda] = useState({
     artista: "",
     cancion: "",
   });
@@ -10,7 +10,7 @@ const Formulario = () => {
 
   //funcion a cada input para leer su contenido
   const actualizarState = (e) => {
-    setbusqueda({
+    setBusqueda({
       ...busqueda,
       [e.target.name]: e.target.value,
     });
@@ -29,10 +29,16 @@ const Formulario = () => {
 
     setError(false);
     //todo bien, pasar al componente principal
+    setBusquedaLetra(busqueda);
   };
 
   return (
     <div className="bg-info">
+      {error ? (
+        <p className="alert alert-danger text-center p-2">
+          Todos los campos son obligatorios{" "}
+        </p>
+      ) : null}
       <div className="container">
         <div className="row">
           <form
